@@ -1,67 +1,67 @@
 # 🎭 Playwright + TypeScript: Zero to Hero & MCP Portfolio
 
-Bienvenido a mi repositorio de entrenamiento y portafolio de **QA Automation con Playwright y TypeScript**. 
-Este proyecto documenta mi transición de QA Manual a QA Automation Engineering, abarcando desde los fundamentos del lenguaje hasta arquitecturas escalables (POM) e integración con **Agentes de IA mediante Playwright MCP**.
+Welcome to my **QA Automation Engineering** training repository and portfolio using **Playwright and TypeScript**.
+This project documents my transition from Manual QA to Test Automation, covering core programming fundamentals, scalable design patterns (**Page Object Model & Custom Fixtures**), API testing, CI/CD pipelines, and **AI-Driven Testing using Playwright MCP (Model Context Protocol)**.
 
 ---
 
-## 🗺️ Mapa de Progreso (Roadmap & Apuntes)
+## 🗺️ Learning Roadmap & Documentation
 
-Cada fase cuenta con sus propios ejercicios prácticos en `/tests` y guías de repaso paso a paso:
+Each phase includes practical test suites in `/tests` and step-by-step study guides in `/docs`:
 
-- [x] **Fase 0: Setup & Git Workflow** — Configuración multiplataforma (Mac/Windows) y primeros pasos.
-- [ ] **Fase 1: TypeScript para Testers & Primeros Tests** — Estructura AAA, `async/await` y locators.
-- [ ] **Fase 2: Dominando Locators y Web-First Assertions** — Formularios, tablas dinámicas y esperas automáticas.
-- [ ] **Fase 3: Arquitectura Page Object Model (POM) & Fixtures** — Escalabilidad nivel entrevista técnica.
-- [ ] **Fase 4: Pruebas Híbridas (API + UI) & Mocking** — `APIRequestContext`, `storageState` e intercepción de red.
-- [ ] **Fase 5: CI/CD con GitHub Actions & Trace Viewer** — Ejecución en la nube y depuración avanzada.
-- [ ] **Fase 6: Playwright MCP (Model Context Protocol)** — Automatización asistida por Agentes de IA (Gemini).
+- [x] **Phase 0: Environment Setup & Git Workflow** — Cross-platform setup (macOS/Windows) & repository initialization.
+- [ ] **Phase 1: TypeScript for Testers & First E2E Tests** — `async/await`, Promises, AAA pattern, and core locators. ([Architecture Notes](./docs/01-framework-architecture.md))
+- [ ] **Phase 2: Mastering User-Facing Locators & Web-First Assertions** — Dynamic elements, auto-waiting, and UI validations.
+- [ ] **Phase 3: Scalable Architecture (POM & Custom Fixtures)** — Enterprise-level maintainability and Data-Driven Testing.
+- [ ] **Phase 4: Hybrid Testing (API + UI) & Network Mocking** — `APIRequestContext`, fast auth with `storageState`, and API intercepts.
+- [ ] **Phase 5: CI/CD with GitHub Actions & Trace Viewer** — Cloud execution, parallelization, and debugging flaky tests.
+- [ ] **Phase 6: AI Agents & Playwright MCP** — Automated exploration and test generation via `@playwright/mcp` & Gemini.
 
 ---
 
-## ⚡ Guía Rápida de Supervivencia (Cheat Sheet)
+## ⚡ Quick Survival Guide (Cheat Sheet)
 
-### 1. Instalación desde cero (Por si clono el repo en otra PC/Mac)
+### 1. Fresh Installation (Cloning on a new machine)
 ```bash
-# 1. Instalar dependencias de Node (lee el package.json)
+# 1. Install Node.js dependencies from package.json
 npm install
 
-# 2. Instalar los navegadores de Playwright (Chromium, Firefox, WebKit)
+# 2. Install Playwright browsers (Chromium, Firefox, WebKit)
 npx playwright install
 ```
 
-### 2. Comandos para Ejecutar Pruebas
-| Acción | Comando en Terminal | Cuándo usarlo |
+### 2. Essential Test Execution Commands
+| Action | Terminal Command | When to use it |
 | :--- | :--- | :--- |
-| **Correr todo (Headless)** | `npx playwright test` | Para validar rápido en consola que todo pasa. |
-| **Correr viendo el navegador** | `npx playwright test --headed` | Para ver visualmente qué está haciendo el script. |
-| **Correr un solo archivo** | `npx playwright test tests/login.spec.ts` | Cuando estoy programando un test específico. |
-| **Modo UI Interactivo (⭐ Top)** | `npx playwright test --ui` | **Mi favorito para estudiar:** permite ver paso a paso, viajar en el tiempo e inspeccionar locators. |
-| **Abrir Reporte HTML** | `npx playwright show-report` | Para ver el resumen detallado y capturas de errores. |
-| **Generador de código (Codegen)** | `npx playwright codegen [https://www.saucedemo.com](https://www.saucedemo.com)` | Si me bloqueo con un selector difícil. |
+| **Run all tests (Headless)** | `npx playwright test` | Fast console validation across all browsers. |
+| **Run in Headed mode** | `npx playwright test --headed` | Visually watch the browser execute steps. |
+| **Run a single spec file** | `npx playwright test tests/login.spec.ts` | Focus on a specific test file while coding. |
+| **Interactive UI Mode (⭐ Top)** | `npx playwright test --ui` | **Best for studying & debugging:** time-travel snapshots and locator picker. |
+| **Open HTML Report** | `npx playwright show-report` | Inspect detailed test results, traces, and errors. |
+| **Launch Codegen** | `npx playwright codegen [https://www.saucedemo.com](https://www.saucedemo.com)` | Record interactions and inspect resilient locators. |
 
 ---
 
-## 🧠 Mi Plantilla Mental "Anti-Hoja en Blanco"
+## 🧠 "Blank Page" Mental Template (AAA Pattern)
 
-Cuando en una entrevista técnica me piden escribir un test desde cero, sigo la **estructura AAA (Arrange, Act, Assert)** en 4 pasos:
+Whenever writing a new test from scratch during a technical interview, follow the **4-Step AAA Pattern (Arrange, Act, Assert)**:
 
 ```typescript
-// 1. IMPORTAR las herramientas base de Playwright
+// 1. IMPORT Playwright test runner and assertion library
 import { test, expect } from '@playwright/test';
 
-// 2. DECLARAR el test y pasar el fixture { page } dentro de una función asíncrona
-test('Descripción clara del escenario de prueba', async ({ page }) => {
+// 2. DECLARE test block injecting the { page } fixture inside an async arrow function
+test('User should log in successfully with valid credentials', async ({ page }) => {
   
-  // 3. ARRANGE (Preparar): Navegar a la página
+  // 3. ARRANGE: Navigate to the target application
   await page.goto('https://www.saucedemo.com/');
 
-  // 4. ACT (Actuar): Buscar el elemento (Locator) + Ejecutar acción
+  // 4. ACT: Locate elements using user-facing locators + perform actions
   await page.getByPlaceholder('Username').fill('standard_user');
   await page.getByPlaceholder('Password').fill('secret_sauce');
   await page.getByRole('button', { name: 'Login' }).click();
 
-  // 5. ASSERT (Validar): Confirmar que el resultado es el esperado
+  // 5. ASSERT: Validate expected outcome using Web-First Assertions
   await expect(page).toHaveURL(/inventory.html/);
   await expect(page.getByText('Products')).toBeVisible();
 });
@@ -69,16 +69,16 @@ test('Descripción clara del escenario de prueba', async ({ page }) => {
 
 ---
 
-## 🔄 Flujo Diario de Git (Mac <-> Windows)
+## 🔄 Daily Git Workflow (macOS <-> Windows)
 
-1. **Antes de empezar a programar** (para traer cambios de mi otra máquina):
+1. **Before coding** (pull latest changes from the cloud):
    ```bash
    git pull origin main
    ```
-2. **Al terminar una lección o test**:
+2. **After completing a module or test**:
    ```bash
    git status
    git add .
-   git commit -m "test: agregar escenarios de login"
+   git commit -m "docs: add framework architecture notes in English"
    git push origin main
    ```
