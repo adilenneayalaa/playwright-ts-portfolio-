@@ -10,8 +10,8 @@ This project documents my transition from Manual QA to Test Automation, covering
 Each phase includes practical test suites in `/tests` and step-by-step study guides in `/docs`:
 
 - [x] **Phase 0: Environment Setup & Git Workflow** — Cross-platform setup (macOS/Windows) & repository initialization.
-- [ ] **Phase 1: TypeScript for Testers & First E2E Tests** — `async/await`, Promises, AAA pattern, and core locators. ([Architecture Notes](./docs/01-framework-architecture.md))
-- [ ] **Phase 2: Mastering User-Facing Locators & Web-First Assertions** — Dynamic elements, auto-waiting, and UI validations.
+- [x] **Phase 1: TypeScript for Testers & First E2E Tests** — `async/await`, Promises, AAA pattern, and core locators. ([Architecture Notes](./docs/01-framework-architecture.md))
+- [x] **Phase 2: Mastering User-Facing Locators & Web-First Assertions** — Dynamic elements, auto-waiting, and UI validations.
 - [ ] **Phase 3: Scalable Architecture (POM & Custom Fixtures)** — Enterprise-level maintainability and Data-Driven Testing.
 - [ ] **Phase 4: Hybrid Testing (API + UI) & Network Mocking** — `APIRequestContext`, fast auth with `storageState`, and API intercepts.
 - [ ] **Phase 5: CI/CD with GitHub Actions & Trace Viewer** — Cloud execution, parallelization, and debugging flaky tests.
